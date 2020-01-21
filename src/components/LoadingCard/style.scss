@@ -1,0 +1,38 @@
+@import "./../../style/variables.scss";
+
+.card {
+  max-width: 100%;
+  width: 255px;
+  height: 382px;
+  margin: 0 auto;
+  position: relative;
+  border: 1px solid #f2f2f2;
+  border-radius: 4px;
+  background: #ffffff;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.25);
+  background: #000;
+  margin-bottom: 15px;
+
+  @media (min-width: $xs) {
+    width: 100%;
+    height: auto;
+    padding-bottom: 145%;
+    margin-bottom: 0;
+  }
+  animation: pulse 0.7s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: rgba(#ddd, 0.3);
+  }
+  50% {
+    background-color: rgba(#ddd, 1);
+  }
+  100% {
+    background-color: rgba(#ddd, 0.3);
+  }
+}

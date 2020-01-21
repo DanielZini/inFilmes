@@ -1,0 +1,68 @@
+@import "./../../style/variables.scss";
+@import "./../../style/helpers.scss";
+
+header {
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.2s ease-in-out;
+
+  @media (max-width: $xs) {
+    background-color: $thirdColor;
+    padding: 5px 0;
+
+    .logo {
+      width: 90px;
+      opacity: 0;
+
+      &.logo-n {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.fixed {
+    background-color: $thirdColor;
+    padding: 5px 0;
+
+    .logo {
+      width: 90px;
+      opacity: 0;
+
+      &.logo-n {
+        opacity: 1;
+      }
+    }
+
+    .form-search {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  h1 {
+    display: inline;
+    font-size: 0;
+    margin: 0;
+    line-height: 0;
+  }
+}
+.row {
+  align-items: center;
+}
+.logo {
+  display: block;
+  width: 130px;
+  max-width: 100%;
+  transition: all 0.2s ease-in-out;
+
+  &.logo-n {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+  }
+}

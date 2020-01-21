@@ -1,0 +1,12 @@
+@import "./../style/variables.scss";
+
+.hidden-xs {
+  @media (max-width: $xs) {
+    display: none;
+  }
+}
+.visible-xs {
+  @media (min-width: $xs) {
+    display: none;
+  }
+}
