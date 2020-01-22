@@ -24,7 +24,9 @@ const SearchBar = (props) => {
   const handlerSearch = event => {
     event.preventDefault();
 
-    searchFunction(movieTitle, movieYear);
+    if (movieTitle) {
+      searchFunction(movieTitle, movieYear);
+    }
   }
 
   return (
@@ -48,6 +50,7 @@ const SearchBar = (props) => {
         <InputGroup>
           <Input
             placeholder="Nome do filme:"
+            required
             name="movieTitle"
             style={{ flex: 3 }}
             value={movieTitle}

@@ -10,3 +10,13 @@
     display: none;
   }
 }
+.img-responsive {
+  max-width: 100%;
+}
+.center-block {
+  display: block;
+  margin: 0 auto;
+}
+.font-text {
+  font-family: $fontText;
+}

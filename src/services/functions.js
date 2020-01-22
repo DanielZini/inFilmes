@@ -27,7 +27,7 @@ export const listMoviesByTitle = async (movieTitle, movieYear, search) => {
       const infos = [];
 
       infos['title'] = item;
-      infos['subTitle'] = search ? 'Busca por:' : 'Coleção';
+      infos['subTitle'] = search ? 'Search for:' : 'Collection';
       infos['movies'] = data['Search'].sort(compare);
 
       result.push(infos);
@@ -38,4 +38,18 @@ export const listMoviesByTitle = async (movieTitle, movieYear, search) => {
   }
 
   return result;
+}
+
+//lista filmes por id
+export const listMoviesById = async (id) => {
+
+  try {
+    const { data } = await axios(`http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}&plot=full`);
+
+    return data;
+
+  } catch (error) {
+    console.log(error);
+  }
+
 }

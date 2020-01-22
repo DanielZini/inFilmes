@@ -135,13 +135,13 @@ const Main = () => {
 
                       {
 
-                        item['movies'].map(movie => {
+                        item['movies'].map((movie, index) => {
 
                           const cover = movie.Poster !== "N/A" ? movie.Poster : defaultCover;
 
                           return (
-                            <Col xs="12" sm="6" md="4" lg="3" key={movie.imdbID}>
-                              <a href="/catalog" title={movie.Title}>
+                            <Col xs="12" sm="6" md="4" lg="3" key={index}>
+                              <a href={'movie/' + movie.imdbID} title={movie.Title}>
                                 <div className="item">
                                   <div className="bg" style={{ backgroundImage: 'url(' + cover + ')' }}></div>
 

@@ -9,7 +9,7 @@ import SearchBar from './../SearchBar';
 
 const Header = props => {
 
-  const { searchFunction } = props;
+  const { searchFunction, negativeLogo } = props;
 
   const [fixedClass, setFixedClass] = useState([]);
 
@@ -27,17 +27,26 @@ const Header = props => {
       <Container>
         <Row>
           <Col xs="9" sm="4">
-            <h1>
-              <a href="/" title="inFilmes">
-                <img src={logo} alt="inFilmes" className="logo" />
-                <img src={logo_n} alt="inFilmes" className="logo logo-n" />
-              </a>
-            </h1>
+            <a href="/" title="inFilmes">
+              {negativeLogo ?
+                <div>
+                  <img src={logo_n} alt="inFilmes" className="logo" />
+                  <img src={logo_n} alt="inFilmes" className="logo logo-n" />
+                </div>
+                :
+                <div>
+                  <img src={logo_n} alt="inFilmes" className="logo logo-n" />
+                  <img src={logo} alt="inFilmes" className="logo" />
+                </div>
+              }
+            </a>
           </Col>
-          <Col xs="3" sm="8" >
+          {searchFunction &&
+            <Col xs="3" sm="8" >
 
-            <SearchBar searchFunction={searchFunction} />
-          </Col>
+              <SearchBar searchFunction={searchFunction} />
+            </Col>
+          }
         </Row>
       </Container>
     </header>
