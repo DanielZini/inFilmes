@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-import ScrollableAnchor, { goToAnchor } from "react-scrollable-anchor";
+import ScrollableAnchor, {
+  goToAnchor,
+  configureAnchors
+} from "react-scrollable-anchor";
 import "./style.scss";
 
 //Components
@@ -11,7 +14,7 @@ import Footer from "./../../components/Footer";
 import LoadingCard from "./../../components/LoadingCard";
 
 //Imagens
-import banner from "./../../assets/img/banner/03.jpg";
+import banner from "./../../assets/img/banner/01.jpg";
 import defaultCover from "./../../assets/img/default-cover.jpg";
 
 //Functions
@@ -24,20 +27,22 @@ const defaultMovies = [
   "Harry Potter"
 ];
 
+//config react anchor
+configureAnchors({ offset: -50, scrollDuration: 200 });
+
 const Main = ({ location }) => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const searchTitleFromMovie = location.state
+  const initialMovieTitle = location.state
     ? [location.state.movieTitle]
     : defaultMovies;
-  const searchYearFromMovie = location.state ? [location.state.movieYear] : "";
+  const initialMovieYear = location.state ? location.state.movieYear : "";
+  const initialIsSearch = location.state ? true : false;
 
   // estados relacionados a busca
-  const [moviesToSearch, setMoviesToSearch] = useState(searchTitleFromMovie);
-  const [movieYearToSearch, setMovieYearToSearch] = useState(
-    searchYearFromMovie
-  );
-  const [isSearch, setIsSearch] = useState(false);
+  const [moviesToSearch, setMoviesToSearch] = useState(initialMovieTitle);
+  const [movieYearToSearch, setMovieYearToSearch] = useState(initialMovieYear);
+  const [isSearch, setIsSearch] = useState(initialIsSearch);
 
   //estado relacionado a listagem
   const [moviesToList, setMoviesToList] = useState([]);

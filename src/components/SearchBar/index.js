@@ -1,49 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { InputGroupAddon, InputGroup, Input } from "reactstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./style.scss";
 
 // Components
 
-const SearchBar = (props) => {
-
-  const [openSearchMobile, setFixedClass] = useState('');
-  const [movieTitle, setMovieTitle] = useState('');
-  const [movieYear, setMovieYear] = useState('');
+const SearchBar = props => {
+  const [openSearchMobile, setFixedClass] = useState("");
+  const [movieTitle, setMovieTitle] = useState("");
+  const [movieYear, setMovieYear] = useState("");
 
   const { searchFunction } = props;
 
   const handlerOpenSearchMobile = () => {
-    setFixedClass('active');
-  }
+    setFixedClass("active");
+  };
   const handlerCloseSearchMobile = () => {
-    setFixedClass('');
-  }
+    setFixedClass("");
+  };
 
   const handlerSearch = event => {
     event.preventDefault();
 
     if (movieTitle) {
+      handlerCloseSearchMobile();
       searchFunction(movieTitle, movieYear);
     }
-  }
+  };
 
   return (
     <div>
       <button
         type="button"
         className="openSearchMobile visible-xs"
-        onClick={() => handlerOpenSearchMobile()}>
+        onClick={() => handlerOpenSearchMobile()}
+      >
         <FontAwesomeIcon icon={faSearch} />
       </button>
 
-      <form onSubmit={handlerSearch} className={"form-search " + openSearchMobile}>
-
+      <form
+        onSubmit={handlerSearch}
+        className={"form-search " + openSearchMobile}
+      >
         <button
           type="button"
           className="closeSearchMobile visible-xs"
-          onClick={() => handlerCloseSearchMobile()}>
+          onClick={() => handlerCloseSearchMobile()}
+        >
           <FontAwesomeIcon icon={faTimes} />
         </button>
 
@@ -54,11 +58,10 @@ const SearchBar = (props) => {
             name="movieTitle"
             style={{ flex: 3 }}
             value={movieTitle}
-            onChange={e => setMovieTitle(e.target.value)} />
+            onChange={e => setMovieTitle(e.target.value)}
+          />
 
-          <InputGroupAddon addonType="append">
-            -
-          </InputGroupAddon>
+          <InputGroupAddon addonType="append">-</InputGroupAddon>
 
           <Input
             placeholder="Ano:"
@@ -66,18 +69,18 @@ const SearchBar = (props) => {
             maxLength="4"
             style={{ flex: 1 }}
             value={movieYear}
-            onChange={e => setMovieYear(e.target.value)} />
+            onChange={e => setMovieYear(e.target.value)}
+          />
 
           <InputGroupAddon addonType="append">
             <button type="submit" className="bt-search">
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </InputGroupAddon>
-
         </InputGroup>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default SearchBar;
