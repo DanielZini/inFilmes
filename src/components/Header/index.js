@@ -7,7 +7,9 @@ import "./style.scss";
 // Components
 import SearchBar from './../SearchBar';
 
-const Header = () => {
+const Header = props => {
+
+  const { searchFunction } = props;
 
   const [fixedClass, setFixedClass] = useState([]);
 
@@ -34,7 +36,7 @@ const Header = () => {
           </Col>
           <Col xs="3" sm="8" >
 
-            <SearchBar />
+            <SearchBar searchFunction={searchFunction} />
           </Col>
         </Row>
       </Container>

@@ -6,17 +6,25 @@ import "./style.scss";
 
 // Components
 
-const SearchBar = () => {
+const SearchBar = (props) => {
 
   const [openSearchMobile, setFixedClass] = useState('');
   const [movieTitle, setMovieTitle] = useState('');
   const [movieYear, setMovieYear] = useState('');
+
+  const { searchFunction } = props;
 
   const handlerOpenSearchMobile = () => {
     setFixedClass('active');
   }
   const handlerCloseSearchMobile = () => {
     setFixedClass('');
+  }
+
+  const handlerSearch = event => {
+    event.preventDefault();
+
+    searchFunction(movieTitle, movieYear);
   }
 
   return (
@@ -28,7 +36,7 @@ const SearchBar = () => {
         <FontAwesomeIcon icon={faSearch} />
       </button>
 
-      <form action="/search" method="post" className={"form-search " + openSearchMobile}>
+      <form onSubmit={handlerSearch} className={"form-search " + openSearchMobile}>
 
         <button
           type="button"
@@ -41,7 +49,6 @@ const SearchBar = () => {
           <Input
             placeholder="Nome do filme:"
             name="movieTitle"
-            required
             style={{ flex: 3 }}
             value={movieTitle}
             onChange={e => setMovieTitle(e.target.value)} />

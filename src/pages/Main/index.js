@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
+import ScrollableAnchor, { goToAnchor } from 'react-scrollable-anchor';
 import './style.scss';
 
 //Components
@@ -16,39 +17,76 @@ import defaultCover from './../../assets/default-cover.jpg'
 //Functions
 import { listMoviesByTitle } from './../../services/functions'
 
+// filmes para listar
+const defaultMovies = [
+  "The Godfather",
+  "The Lord of The Rings",
+  "Harry Potter",
+]
+
 const Main = () => {
 
-  const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // filmes para listar
-  const movies = [
-    "The Godfather",
-    "The Lord of The Rings",
-    "Harry Potter",
-  ]
+  // estados relacionados a busca
+  const [moviesToSearch, setMoviesToSearch] = useState(defaultMovies);
+  const [movieYearToSearch, setMovieYearToSearch] = useState();
+  const [isSearch, setIsSearch] = useState(false);
+
+  //estado relacionado a listagem
+  const [moviesToList, setMoviesToList] = useState([]);
 
   useEffect(() => {
 
     const listMovies = async () => {
 
-      setMovieList(await listMoviesByTitle(movies));
+      setMoviesToList(await listMoviesByTitle(moviesToSearch, movieYearToSearch, isSearch));
       setIsLoading(false);
+
     }
 
     listMovies();
 
-  }, [movies])
+  }, [moviesToSearch, movieYearToSearch, isSearch, isLoading])
+
+  const handlerSearchFunction = async (movieTitle, movieYear) => {
+
+    if (movieTitle) {
+      setIsLoading(true);
+      setMoviesToSearch([movieTitle]);
+      setMovieYearToSearch(movieYear);
+      setIsSearch(true);
+
+      goToAnchor('anchor', false);
+
+    } else {
+      setIsLoading(true);
+      setMoviesToSearch(defaultMovies);
+      setIsSearch(false);
+      goToAnchor('anchor', false);
+
+    }
+  }
+
+  const handlerClearSearch = () => {
+    setIsLoading(true);
+    setMoviesToSearch(defaultMovies);
+    setIsSearch(false);
+  }
 
   return (
     <div>
-      <Header />
+      <Header searchFunction={handlerSearchFunction} />
 
       <div className="full-banner">
         <div className="item">
           <div className="bg" style={{ backgroundImage: 'url(' + banner + ')' }}></div>
         </div>
       </div>
+
+      <ScrollableAnchor id={'anchor'}>
+        <div></div>
+      </ScrollableAnchor>
 
       {isLoading ?
 
@@ -64,7 +102,7 @@ const Main = () => {
 
         :
 
-        movieList.length <= 0 ?
+        moviesToList.length <= 0 ?
 
           <section>
             <Container>
@@ -76,13 +114,21 @@ const Main = () => {
 
           :
 
-          movieList.map((item, index) => {
+          moviesToList.map((item, index) => {
 
             return (
               <section key={index}>
                 <Container>
 
-                  <h2><span>Coleção</span> {item['title']}</h2>
+                  {isSearch &&
+                    <button type="button" className="clear-search" onClick={() => handlerClearSearch()}>
+                      <FontAwesomeIcon icon={faLongArrowAltLeft} />
+                      Voltar
+                      </button>
+                  }
+                  <h2>
+                    <span>{item['subTitle']}</span> {item['title']}
+                  </h2>
 
                   <div className="list-catalog">
                     <Row noGutters={true}>

@@ -13,19 +13,21 @@ export const compare = (a, b) => {
 }
 
 //lista filmes por titulo
-export const listMoviesByTitle = async (movieTitle) => {
+export const listMoviesByTitle = async (movieTitle, movieYear, search) => {
   let result = []
 
   for (const [index, item] of movieTitle.entries()) {
 
     let titleSearch = item.toLowerCase().replace(" ", "+");
+    const yearSearchTerm = movieYear ? 'y=' + movieYear : '';
 
     try {
-      const { data } = await axios(`http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${titleSearch}&type=movie`);
+      const { data } = await axios(`http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${titleSearch}&${yearSearchTerm}`);
 
       const infos = [];
 
       infos['title'] = item;
+      infos['subTitle'] = search ? 'Busca por:' : 'Coleção';
       infos['movies'] = data['Search'].sort(compare);
 
       result.push(infos);
@@ -36,22 +38,4 @@ export const listMoviesByTitle = async (movieTitle) => {
   }
 
   return result;
-}
-
-//lista filmes por titulo na busca
-export const searchMoviesByTitle = async (movieTitle) => {
-  let result = []
-
-  let titleSearch = movieTitle.toLowerCase().replace(" ", "+");
-
-  try {
-    const { data } = await axios(`http://www.omdbapi.com/?apikey=a10c59bc&s=${titleSearch}&type=movie`);
-
-    result = data['Search'].sort(compare);
-
-    return result;
-
-  } catch (error) {
-    console.log(error);
-  }
 }

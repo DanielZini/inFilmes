@@ -61,12 +61,51 @@ section {
     justify-content: center;
   }
 
+  .container {
+    position: relative;
+  }
+
+  .wrap-title {
+    flex-wrap: wrap;
+  }
+
+  button.clear-search {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    display: block;
+    margin: 0 auto 5px auto;
+    height: auto;
+    font-size: 13px;
+    line-height: 1;
+    padding: 8px 12px;
+    background: #f1f1f1;
+    border: none;
+    border-bottom: 2px solid #e3e3e3;
+    outline: none;
+    color: $primaryColor;
+    text-transform: lowercase;
+    transition: all 0.1s linear;
+
+    svg {
+      font-size: 15px;
+      margin-right: 5px;
+    }
+
+    &:hover {
+      background: $primaryColor;
+      color: #fff;
+      border-color: darken($primaryColor, 10%);
+    }
+  }
+
   h2 {
     font-size: 30px;
     margin: 0 0 30px;
     color: $secondColor;
     text-align: center;
     line-height: 25px;
+    text-transform: capitalize;
 
     @media (min-width: $sm) {
       font-size: 40px;
