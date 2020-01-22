@@ -1,4 +1,4 @@
-@import "./../../style/variables.scss";
+@import "./../../styles/variables.scss";
 
 .banner-movie {
   width: 100%;
@@ -89,7 +89,7 @@ img.full-cover {
 }
 section.dark {
   background: $thirdColor;
-  padding: 30px 0;
+  // padding: 30px 0;
 
   ul {
     li {
@@ -109,13 +109,12 @@ section.dark {
   @media (max-width: $xs) {
     margin-bottom: 30px;
   }
-  border: 1px solid #ccc;
   padding: 30px 15px;
   border-radius: 10px;
   background-color: #ffffff;
-  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 3px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 3px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 5px 4px 0px rgba(0, 0, 0, 0.1);
 
   img {
     width: 200px;
